@@ -8,16 +8,40 @@ service:
   type: ClusterIP
   externalPort: 8000
   internalPort: 8000
+
+## Ingress configuration.
+## ref: https://kubernetes.io/docs/user-guide/ingress/
+##
 ingress:
-  enabled: true
-  hosts:
-    - centrifugo.local
-  annotations:
-    kubernetes.io/ingress.class: nginx
-    ingress.kubernetes.io/upstream-fail-timeout: 60
-    ingress.kubernetes.io/upstream-max-fails: 2
-    ingress.kubernetes.io/proxy-read-timeout: 3600
-    ingress.kubernetes.io/proxy-send-timeout: 3600
+  enabled: false
+
+  ## Hostnames.
+  ## Must be provided if Ingress is enabled.
+  ##
+  # hosts:
+  #   - centrifugo.local
+
+  ## Annotations.
+  ##
+  #  annotations:
+  #    kubernetes.io/ingress.class: nginx
+  #    ingress.kubernetes.io/upstream-fail-timeout: 60
+  #    ingress.kubernetes.io/upstream-max-fails: 2
+  #    ingress.kubernetes.io/proxy-read-timeout: 3600
+  #    ingress.kubernetes.io/proxy-send-timeout: 3600
+  #
+  #    If you use https://github.com/nginxinc/kubernetes-ingress add next annotation
+  #    to enable websockets:
+  #    nginx.org/websocket-services: centrifugo-centrifugo
+  #
+
+  ## TLS configuration.
+  ## Secrets must be manually created in the namespace.
+  ##
+  # tls:
+  #   - secretName: centrifugo-tls
+  #     hosts:
+  #       - centrifugo.local
 
 config:
   secret: secret
@@ -38,11 +62,4 @@ config:
 args:
   - --web=true
 
-resources:
-  limits:
-    cpu: 100m
-    memory: 256Mi
-  requests:
-    cpu: 100m
-    memory: 256Mi
-
+resources: {}

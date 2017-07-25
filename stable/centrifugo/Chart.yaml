@@ -9,5 +9,6 @@ keywords:
 - golang
 home: https://github.com/centrifugal/centrifugo
 maintainers:
-  - name: Oleh Ozimok
+  - name: oleh-ozimok
     email: ozimok.oleg@gmail.com
+icon: https://habrastorage.org/files/939/023/35d/93902335d4ef41d8b5f97e8ceaa2c59e.gif
